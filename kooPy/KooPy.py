@@ -59,8 +59,11 @@ class Koo:
 
         """
 
-        koos = self.getUserKoosRaw(userName, limit)
+        userId = self.getUserProfile(userName)['userId']
+        url = f"https://www.kooapp.com/apiV1/users/created/ku/{userId}?limit={limit}&offset=0&showPoll=false&showMultiLangKoo=true"
+        r = requests.get(url)
 
+        koos = r.json()
         koosData = []
         for koo in koos['feed']:
             kooItems = {}
